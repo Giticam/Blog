@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <a href="/home">Home</a>
-  <a href="/about">About</a>
+  <a href="/home">Home</a>|
+  <a href="/about">About</a>|
+  <%= link_to "New Posts", new_post_path %>|
+  <%= link_to "All Posts", posts_path %>|
+  <%= link_to "New Comments", new_comment_path %>|
+  <%= link_to "All Comments", comments_path %>|
 <%= yield %>
 
 </body>

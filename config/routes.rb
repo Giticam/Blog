@@ -3,11 +3,20 @@ Rails.application.routes.draw do
   get "/about" => "home#about"
 
   get "/home" => "home#index"
-  
+
   # get "/post" => "posts#new" as: :new_posts
   # get "/post/:id" => "posts#create" as: :create_posts
   #
   resources :posts
+
+  resources :comments
+
+  # get "/comments/new" => "comments#new", as: :new_comments
+
+
+
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
