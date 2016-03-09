@@ -1,30 +1,11 @@
-<h1>Update Profile</h1>
-
-<%= form_for @user do |f| %>
-<div>
-  <%= f.label :first_name %>
-  <%= f.text_field  :first_name%>
+<div class="container">
+  <h1>Update Profile</h1>
+  <%= simple_form_for @user do |f| %>
+  <%= f.input  :first_name%>
+  <%= f.input :last_name%>
+  <%= f.input  :email%>
+  <%= f.input  :password%>
+  <%= f.input :password_confirmation%>
+  <%= f.button :submit %>
+  <% end %>
 </div>
-<br />
-<div>
-  <%= f.label :last_name %>
-  <%= f.text_field  :last_name%>
-</div>
-<br />
-<div>
-  <%= f.label :email %>
-  <%= f.email_field  :email%>
-</div>
-<br />
-<div>
-  <%= f.label :password %>
-  <%= f.password_field  :password%>
-</div>
-<br />
-<div>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field  :password_confirmation%>
-</div>
-<br />
-<%= f.submit %>
-<% end %>

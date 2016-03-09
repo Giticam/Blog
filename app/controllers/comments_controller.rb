@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+
+  before_action :authorize_user, only:[:destroy]
+
   # def new
   #   @comment = Comment.new
   # end
@@ -36,9 +39,19 @@ class CommentsController < ApplicationController
   def destroy
 
     @comment = Comment.find params[:id]
-    @comment.destroy
-    redirect_to post_path(params[:post_id]), notice: "Comment Deleted!"
+    if @comment.user == current_user || @post.user == current_user
+      @comment.destroy
+      redirect_to post_path(params[:post_id]), notice: "Comment Deleted!"
+    else
+      flash[alert] = "Access denied!"
+      render "/posts/show"
+    end
   end
 
-
+  private
+  def authorize_user
+    unless can? :manage, @comment
+    redirect_to root_path, alert: "access denied"
+    end
+  end
 end
