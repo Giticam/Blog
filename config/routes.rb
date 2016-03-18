@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+
+
   get "/about" => "home#about"
 
   get "/home" => "home#index"
@@ -16,8 +18,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
   resources :comments
-
   resources :users, only:[:new, :create, :edit, :update]
+  resources :password_resets
 
   resources :sessions, only:[:new, :create] do
   delete :destroy, on: :collection

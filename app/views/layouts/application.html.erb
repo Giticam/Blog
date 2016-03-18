@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
   <title>Blog</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%#= stylesheet_link_tag "main" %>
+  <%#= stylesheet_link_tag "bootstrap" %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
@@ -11,42 +14,43 @@
   <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <!-- <a class="nav-left" href="#"><%#= image_tag "Drawing"%></a> -->
-    <a class="navbar-brand navbar-left" href="#">My Blog</a>
-  <ul class="nav navbar-nav navbar-right">
+    <!-- <a class="navbar-brand navbar-left" href="#">My Blog</a>
     <li><a href="/home">Home</a></li>
-    <li><a href="/about">About</a></li>
+    <li><a href="/about">About</a></li> -->
+    <a class="navbar-brand navbar-left" href="#">My Blog</a>
+    <%= form_tag(posts_path, :method => "get", id: "search-form",class:"navbar-brand navbar-left",role: "search") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+    <%= submit_tag "Search",:name => nil, class: "btn btn-default" %>
+    <% end %>
+    <ul class="nav navbar-nav navbar-right">
     <li><%= link_to "New Posts", new_post_path %></li>
     <li><%= link_to "All Posts", posts_path %> </li>
-      <% if session[:user_id] %>
+    <li><%= link_to "Sign up", new_user_path %></li>
+      <% if user_signed_in? %>
       <li>Hello <%= User.find(session[:user_id]).first_name %> </li>
-      <% else %>
-        <li><%= link_to "Sign up", new_user_path %></li>
+      <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
       <% end %>
       <li><%= link_to "Sign in", new_session_path %></li>
       <li><%= link_to "Sign out", sessions_path, method: :delete %></li>
   </ul>
-  <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-<%= submit_tag "Search" %>
-<% end %>
 </nav>
 </div>
-  <!-- <a href="/home">Home</a>|
-  <a href="/about">About</a>|
-  <%= link_to "New Posts", new_post_path %>|
-  <%= link_to "All Posts", posts_path %>|
-  <% if session[:user_id] %>
-  Hello <%= User.find(session[:user_id]).first_name %>
-  <%= link_to "Sign out", sessions_path, method: :delete %>
-  <% else %>
-  <%= link_to "Sign in", new_session_path %>
-  <%= link_to "Sign up", new_user_path %>|
-  <% end %> -->
 
+<div>
+  <% if notice %>
+  <div class="alert fade in alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4><%= notice %></h4>
+  </div>
 
-  <!-- <%= link_to "New Comments", new_comment_path %>|
-  <%= link_to "All Comments", comments_path %>| -->
-<%= notice || alert  %>
+  <% elsif alert %>
+  <div class="alert fade in alert-danger">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4><%= alert %></h4>
+  </div>
+  <% end %>
+</div>
+
 <%= yield %>
 
 </body>

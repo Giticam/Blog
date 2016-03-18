@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :find_user, only: [:show,:edit,:update]
+before_action :find_user, only: [:show,:edit,:update,:edit_password,:update_password]
 
   def new
     @user = User.new
@@ -18,7 +18,9 @@ before_action :find_user, only: [:show,:edit,:update]
   end
 
   def edit
+  end
 
+  def show
   end
 
   def update

@@ -13,46 +13,6 @@
  *= require_tree .
  *= require_self
  */
-body{
-  background: #ececec url(../images/sos.png) repeat;
-  font-size: 100%;
-  font-family: arial, sans-serif;
-  color: #666666;
-  line-height: 1.7em;
-  text-align: left;
-}
-.container{
-  width: 80%;
-  margin: 0 auto;
-  overflow:auto;
-  clear:both;
-}
-.main-header #logo{
-  width: 45%;
-  margin: 10px 0;
-}
-#content{
-  width: 70%;
-  float:left;
-  overflow:auto;
-}
-#sidebar{
-  width: 30%;
-  float: left;
-}
-a{
-  text-decoration: none;
-  color: #781a26;
-}
-a:hover{
-  color:#666666;
-}
-h2{
-  color:#781a26;
-}
-.clr{
-  clear:both;
-}
 
 
 h1{
@@ -63,6 +23,15 @@ h1{
   width: 200px;
 }
 .sessions{
-  padding-top: -100px;
-  margin-top: 100px;
+  padding-top: -50px;
+  margin-top: 50px;
+  margin-left: 10px;
+}
+.post-container{
+  padding-top: -50px;
+  margin-top: 50px;
+  margin-left: 10px;
+}
+body{
+  padding-top: 65px;
 }

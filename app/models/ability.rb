@@ -12,14 +12,13 @@ class Ability
         can :read, :all
       end
 
-      can :manage, Post do |post|
-        post.user == @user
+      can :manage, Post, :user_id => user.id
+
+      can :manage, Comment, :user_id => user.id
+      can :destroy, Comment do |comm|
+        comm.post.user_id == user.id 
       end
 
-      can :manage, Comment do |comment|
-        comment.user == @user
-      end
-      
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

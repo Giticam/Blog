@@ -1,26 +1,12 @@
 <div class="container">
-
-
   <h1>Sign up</h1>
-  <%= @user.errors.full_messages.join(" ,") %>
-
+    <%= @user.errors.full_messages.join(" ,") %>
   <%= simple_form_for @user do |f| %>
-  <div>
     <%= f.input  :first_name%>
-  </div>
-  <div>
     <%= f.input  :last_name%>
-  </div>
-  <div>
     <%= f.input  :email%>
-  </div>
-  <div>
     <%= f.input :password%>
-  </div>
-  <div>
     <%= f.input :password_confirmation%>
-  </div>
-
   <%= f.button :submit %>
   <% end %>
 </div>

@@ -1,20 +1,18 @@
 class CommentsController < ApplicationController
 
-  before_action :authorize_user, only:[:destroy]
+  load_and_authorize_resource :post
+  load_and_authorize_resource :comment, through: :post
 
   # def new
   #   @comment = Comment.new
   # end
   def create
-    @post = Post.find params[:post_id]
-    comment_params = params.require(:comment).permit(:body)
-    @comment = Comment.new(comment_params)
     @comment.post = @post
-      if @comment.save
-        redirect_to post_path(@post), notice: "Comment Created"
-      else
-        render "/posts/show"
-      end
+    if @comment.save
+      redirect_to post_path(@post), notice: "Comment Created"
+    else
+      render "/posts/show"
+    end
   end
 
   # def index
@@ -37,21 +35,17 @@ class CommentsController < ApplicationController
   # end
 
   def destroy
-
-    @comment = Comment.find params[:id]
-    if @comment.user == current_user || @post.user == current_user
-      @comment.destroy
-      redirect_to post_path(params[:post_id]), notice: "Comment Deleted!"
-    else
-      flash[alert] = "Access denied!"
-      render "/posts/show"
-    end
+    if @comment.destroy
+    redirect_to post_path(params[:post_id]), notice: "Comment Deleted!"
+  else
+    flash[alert] = "You are not the owner of the comment.Access denied!"
+    render "/posts/show"
   end
+end
 
-  private
-  def authorize_user
-    unless can? :manage, @comment
-    redirect_to root_path, alert: "access denied"
-    end
-  end
+private
+
+def comment_params
+  comment_params = params.require(:comment).permit(:body)
+end
 end

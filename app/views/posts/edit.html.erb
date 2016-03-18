@@ -1,11 +1,9 @@
 <h1>Edit Post</h1>
-<% if @post.errors.any? %>
-  <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="post-container">
+  <% if @post.errors.full_messages.size > 0 %>
+  <div class="alert"><%= @post.errors.full_messages.join(",") %></div>
+  <% end %>
+</div>
 <%= form_for @post do |f| %>
   <div>
     <%= f.label :title %>
