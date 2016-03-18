@@ -1,0 +1,17 @@
+<h1>Edit Post</h1>
+<div class="post-container">
+  <% if @post.errors.full_messages.size > 0 %>
+  <div class="alert"><%= @post.errors.full_messages.join(",") %></div>
+  <% end %>
+</div>
+<%= form_for @post do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>

@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+# 10.times do
+#    Post.create        title: Faker::Company.catch_phrase
+
+,
+#                       body: Faker::Hipster.paragraph
+# end
+10.times do
+  Comment.create(body: Faker::Company.catch_phrase)
+end
+
+["Technology","Sports","Medical","Social","Education","Politics","Economics","Transportation","Tourism","Human Resources"].each do|cat|
+  Category.create(title:cat)
+
+end
